@@ -6,7 +6,14 @@ function Login() {
     const [password,setPassword] =  useState("")
 
     const handleLogin = async () =>{
-      axios.post("http://localhost:3000/login")
+      try {
+        const res = axios.post("http://localhost:3000/login",{
+          email: email,
+          password: password
+        })
+      } catch (error) {
+        console.error(error)
+      }
     }
     return (
       <div className="flex items-center justify-center min-h-1/2 my-16">
@@ -34,7 +41,9 @@ function Login() {
   
             <div className="card-actions flex flex-col gap-3 mt-6">
               <button 
-              className="btn btn-primary w-full py-3 text-lg font-medium">Login</button>
+              className="btn btn-primary w-full py-3 text-lg font-medium"
+              onClick={handleLogin}
+              >Login</button>
               <p className="text-center text-sm text-gray-400">
                 Dont have an account? <a href="#" className="text-primary">Sign up</a>
               </p>
